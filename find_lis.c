@@ -6,7 +6,7 @@
 /*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 08:16:14 by llepiney          #+#    #+#             */
-/*   Updated: 2022/03/14 11:37:26 by llepiney         ###   ########.fr       */
+/*   Updated: 2022/03/15 22:13:45 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_len(int *array)
 		return (i);
 }
 
-void	fill_ends(int *ends, int **all_arrays)//pour remplir tab d'ends a chaque fois
+void	fill_ends(int *ends, int **all_arrays) //pour remplir tab d'ends a chaque fois
 {
 	int	i;
 	int	line_length;
@@ -73,6 +73,20 @@ int	case_biggest(int num, t_list *ends, t_uplist *all)
 		tmp = tmp->next; //parcourt, si num pas plus grand, sort
 	}
 	ft_lstadd_back(longest(all), ft_lstnew(num)); //ajoute elem a liste la plus longue avec num
+	return (1);
+}
+
+int	first_nmax(int num, t_list *ends)
+{
+	t_list	*tmp;
+
+	tmp = ends;
+	while (tmp->content)
+	{
+		if (tmp->content < num)
+			return(tmp->content);
+		tmp->next;
+	}
 	return (0);
 }
 
@@ -80,17 +94,53 @@ int	*find_lis(int *stack)
 {
 	t_list		*ends;
 	t_uplist	*all;
+	t_uplist	*begin;
+	t_uplist	*tmp;
 	int			i;
+	int			nmax;
 
 	ends = malloc(sizeof(int) * ft_len(stack));
 	if (!ends)
 		return (0);
-	all = ft_uplstnew(ft_lstnew(stack[0])); // creer liste de listes + remplit avec premier nbr de stack
+	all = ft_uplstnew(ft_lstnew(stack[0])); // creer upliste de listes + remplit lst avec premier nbr de stack
 	ends = ft_lstnew(stack[0]); //ends initial
 	i = 1;
 	while (stack[i])
 	{
-		case_biggest(stack[i], ends, all);
-		fill_ends(ends); //update tableau d'ends
+		if (case_biggest(stack[i], ends, all) == 0)
+		{
+			nmax = first_nmax(stack[i]);
+			while (ends->content)
+			{
+				if (ends->content < stack[i] && ends->content > nmax)// si end d'une liste < num actuel && > num max inf
+					nmax = ends->content;
+				ends->next;
+			}//nmax est le max inf a stack[i]
+			begin = *all; // pas sure
+			while (begin->lst) //boucle pour atteindre lst a extend puis extend
+			{
+				if (ft_lstlast(begin->lst) == nmax)
+				{
+					ft_lstadd_back(*begin->lst, ft_lstnew(nmax));
+					break ;
+				}
+				begin->next;
+			}
+			all = *begin; // pas sure
+			begin = *all;
+			while (begin->next->lst)// pour discard les lst m size que la new jusqu'a avant derniere
+			{
+				if (ft_lstsize(begin->lst) == ft_lstsize(ft_uplstlast(begin)))
+				{
+					tmp = begin->next;
+					free(begin->lst->content);
+					free(begin->lst);
+					begin = tmp;
+				}
+			}
+			all = begin; //pas sure
+		}
+		fill_ends(ends); //update liste d'ends
 	}
+	return (longest_lst(all));
 }
