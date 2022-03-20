@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   sup_ends.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/29 17:07:26 by llepiney          #+#    #+#             */
-/*   Updated: 2022/03/14 10:14:00 by llepiney         ###   ########.fr       */
+/*   Created: 2022/03/20 00:33:22 by rigel             #+#    #+#             */
+/*   Updated: 2022/03/20 14:06:47 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+/*
+int sup_ends(t_list *ends, int num)
 {
-	while (lst)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
-}
+    t_list  *lst;
+
+    lst = ends;
+    while (lst)
+    {
+        if (lst->content > num)
+            return (FALSE);
+        lst = lst->next;
+    }
+    clone_lst();
+    extend_lst();
+}*/

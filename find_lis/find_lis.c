@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uplstlast.c                                     :+:      :+:    :+:   */
+/*   find_lis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 21:24:56 by llepiney          #+#    #+#             */
-/*   Updated: 2022/03/17 23:28:11 by rigel            ###   ########.fr       */
+/*   Created: 2022/03/19 18:00:43 by rigel             #+#    #+#             */
+/*   Updated: 2022/03/20 19:06:16 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_uplist	*ft_uplstlast(t_uplist *uplst)
+t_uplist	*find_lis(int *tab, int size)
 {
-	t_uplist	*uptmp;
+	int			i;
+	t_list		*ends;
+	t_uplist	*ulst;
 
-	uptmp = uplst;
-	while (uptmp)
+	ulst = ft_uplstnew(ft_lstnew(tab[0]));
+	ends = ft_lstnew(tab[0]);
+	i = 1;
+	while (i++ < size)
 	{
-		if (uptmp->next == NULL)
-			return (uptmp);
-		uptmp = uptmp->next;
+		if (sup_ends() == FALSE)
+			between_ends();
+		fill_ends();
 	}
-	return (uptmp);
+	free_lst(ends);
+	return (ulst);
 }
+
+//oublie pas de clear ulst

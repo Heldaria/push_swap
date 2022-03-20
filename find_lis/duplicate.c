@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   duplicate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/29 17:01:02 by llepiney          #+#    #+#             */
-/*   Updated: 2022/03/14 10:13:47 by llepiney         ###   ########.fr       */
+/*   Created: 2022/03/20 19:24:16 by rigel             #+#    #+#             */
+/*   Updated: 2022/03/20 19:24:54 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+t_list	*duplicate(t_list *lst)
 {
-	t_list	*begin_list;
-	t_list	*temp;
+	t_list	*to_clone;
+	t_list	*res;
 
-	begin_list = *lst;
-	while (begin_list)
+	to_clone = lst;
+	res = ft_lstnew(lst->content);
+	to_clone = to_clone->next;
+	while (to_clone && res)
 	{
-		temp = begin_list->next;
-		ft_lstdelone(begin_list, del);
-		begin_list = temp;
+		ft_lstadd_back(&res, ft_lstnew(lst->content));
+		res = res->next;
+		to_clone = to_clone->next;
 	}
-	*lst = 0;
+	return (res);
 }

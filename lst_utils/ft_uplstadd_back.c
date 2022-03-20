@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uplstlast.c                                     :+:      :+:    :+:   */
+/*   ft_uplstadd_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 21:24:56 by llepiney          #+#    #+#             */
-/*   Updated: 2022/03/17 23:28:11 by rigel            ###   ########.fr       */
+/*   Created: 2022/03/17 14:50:22 by rigel             #+#    #+#             */
+/*   Updated: 2022/03/17 16:08:16 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_uplist	*ft_uplstlast(t_uplist *uplst)
+void	ft_uplstadd_back(t_uplist *alst, t_uplist *new)
 {
-	t_uplist	*uptmp;
+	t_uplist	*tmp;
 
-	uptmp = uplst;
-	while (uptmp)
+	if (!alst || !new)
+		return ;
+	tmp = alst;
+	if (alst == NULL)
 	{
-		if (uptmp->next == NULL)
-			return (uptmp);
-		uptmp = uptmp->next;
+		alst = new;
+		return ;
 	}
-	return (uptmp);
+	while (tmp)
+	{
+		if (tmp->next == NULL)
+		{
+			tmp->next = new;
+			break ;
+		}
+		tmp = tmp->next;
+	}
 }

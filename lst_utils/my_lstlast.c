@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   my_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/29 16:56:18 by llepiney          #+#    #+#             */
-/*   Updated: 2022/03/14 10:13:54 by llepiney         ###   ########.fr       */
+/*   Created: 2022/03/19 04:50:07 by rigel             #+#    #+#             */
+/*   Updated: 2022/03/19 05:07:42 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+t_elem	*my_lstlast(t_elem *lst)
 {
-	del(lst->content);
-	free(lst);
+	if (lst)
+		while (lst->next)
+			lst = lst->next;
+	return (lst);
 }
