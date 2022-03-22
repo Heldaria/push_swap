@@ -6,24 +6,24 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 00:33:22 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/20 14:06:47 by rigel            ###   ########.fr       */
+/*   Updated: 2022/03/21 14:14:50 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-/*
-int sup_ends(t_list *ends, int num)
+int	sup_ends(t_uplist *ulst, int lvl)
 {
-    t_list  *lst;
+	t_uplist	*utmp;
+	t_list		*tmp;
 
-    lst = ends;
-    while (lst)
-    {
-        if (lst->content > num)
-            return (FALSE);
-        lst = lst->next;
-    }
-    clone_lst();
-    extend_lst();
-}*/
+	utmp = ulst;
+	while (utmp)
+	{
+		tmp = ft_lstlast(utmp->lst);
+		if (tmp->content > lvl)
+			return (FALSE);
+		utmp = utmp->next;
+	}
+	return (TRUE);
+}

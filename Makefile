@@ -1,7 +1,6 @@
 NAME = push_swap
 
-SRC =	find_lis/sup_ends.c \
-		init_stack.c \
+SRC =	init_stack.c \
 		lst_utils.c \
 		push_swap.c \
 		ft_atoi.c \
@@ -12,6 +11,11 @@ SRC =	find_lis/sup_ends.c \
 		check_way.c \
 		lst_utils/my_lstlast.c \
 		find_lis/duplicate.c \
+		find_lis/find_lis.c \
+		find_lis/clone_sup.c \
+		find_lis/sup_ends.c \
+		find_lis/between_ends.c \
+		find_lis/free.c \
 		$(addprefix lst_utils/, \
 		ft_lstadd_back.c   ft_lstnew.c   ft_uplstlast.c \
 		ft_lstadd_front.c  ft_lstlast.c  ft_lstsize.c   ft_uplstnew.c \

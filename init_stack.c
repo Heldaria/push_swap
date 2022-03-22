@@ -6,7 +6,7 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 03:44:44 by ayblin            #+#    #+#             */
-/*   Updated: 2022/03/20 07:39:32 by rigel            ###   ########.fr       */
+/*   Updated: 2022/03/21 12:45:54 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_stack	*init_stack(char **val)
 	}
 	stack ->a_end = elem;
 	stack->a_len = i;
-	stack->b = NULL; 
-	return (stack);
+	stack->b = NULL;
 	set_pos(stack);
+	return (stack);
 }

@@ -6,7 +6,7 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 19:24:16 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/20 19:24:54 by rigel            ###   ########.fr       */
+/*   Updated: 2022/03/21 01:39:30 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ t_list	*duplicate(t_list *lst)
 	to_clone = lst;
 	res = ft_lstnew(lst->content);
 	to_clone = to_clone->next;
-	while (to_clone && res)
+	while (to_clone)
 	{
-		ft_lstadd_back(&res, ft_lstnew(lst->content));
-		res = res->next;
+		ft_lstadd_back(&res, ft_lstnew(to_clone->content));
 		to_clone = to_clone->next;
 	}
 	return (res);

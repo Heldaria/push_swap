@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_lis.c                                         :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 18:00:43 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/22 12:38:37 by rigel            ###   ########.fr       */
+/*   Created: 2022/03/21 14:47:18 by rigel             #+#    #+#             */
+/*   Updated: 2022/03/22 12:37:05 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_uplist	*find_lis(int *tab, int size)
+void	free_list(t_list **lst)
 {
-	int			i;
-	t_uplist	*ulst;
+	t_list	*begin_list;
+	t_list	*temp;
 
-	ulst = ft_uplstnew(ft_lstnew(tab[0]));
-	i = 1;
-	print_ulst(ulst);
-	while (i < size)
+	begin_list = *lst;
+	while (begin_list)
 	{
-		if (sup_ends(ulst, tab[i]))
-			clone_sup(ulst, tab[i]);
-		else
-			between_ends(ulst, tab[i]);
-		i++;
+		temp = begin_list->next;
+		free(begin_list);
+		begin_list = temp;
 	}
-	print_ulst(ulst);
-	return (ulst);
+	*lst = 0;
 }
-//oublie pas de clear ulst
+
+void	free_uplst(t_uplist **ulst)
+{
+	t_uplist	*begin_list;
+
+	begin_list = *ulst;
+	free_list(&begin_list->lst);
+	free(begin_list);
+	*ulst = 0;
+}
