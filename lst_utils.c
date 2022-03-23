@@ -6,7 +6,7 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 03:36:15 by ayblin            #+#    #+#             */
-/*   Updated: 2022/03/21 13:29:13 by rigel            ###   ########.fr       */
+/*   Updated: 2022/03/22 23:39:46 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ void	my_lis_print(t_list *lst)
 
 void	print_stacks(t_stack *stack)
 {
-	    my_lst_print(stack->a);
-        my_lst_print(stack->b);
-		printf("\n");
+	printf("A");
+	my_lst_print(stack->a);
+	printf("B");
+	my_lst_print(stack->b);
+	printf("\n");
 }
 
 void	print_ulst(t_uplist *ulst)
@@ -70,4 +72,18 @@ void	print_ulst(t_uplist *ulst)
 		ulst = ulst->next;
 	}
 	printf("\n");
+}
+
+void	print_mv_tab(t_stack *stack)
+{
+	t_elem	*lst;
+	int		*tab;
+
+	lst = stack->b;
+	while (lst)
+	{
+		tab = mv_tab(stack, lst);
+		printf("<%d,%d> ", tab[0], tab[1]);
+		lst = lst->next;
+	}
 }

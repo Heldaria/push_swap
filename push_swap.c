@@ -6,7 +6,7 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 03:36:11 by ayblin            #+#    #+#             */
-/*   Updated: 2022/03/21 14:24:10 by rigel            ###   ########.fr       */
+/*   Updated: 2022/03/23 01:36:04 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	min_first(t_stack	*stack)
 	}
 }
 
-int	*tab_create2(t_elem *stack, int len)
+int	*tab_create2(t_elem *stack_a, int len)
 {
 	t_elem	*tmp;
 	int		*ret;
@@ -40,9 +40,18 @@ int	*tab_create2(t_elem *stack, int len)
 	ret = malloc(sizeof(int) * len);
 	if (!ret)
 		return (0);
-	tmp = stack;
+	tmp = stack_a;
 	i = 0;
-	while (i < len)
+	while (tmp->lvl != 0)
+		tmp = tmp->next;
+	while (tmp)
+	{
+		ret[i] = tmp->lvl;
+		i++;
+		tmp = tmp->next;
+	}
+	tmp = stack_a;
+	while (tmp->lvl != 0)
 	{
 		ret[i] = tmp->lvl;
 		i++;
@@ -64,12 +73,13 @@ int	main(int ac, char **av)
 	sort_int_tab(tab, stack->a_len - 1);
 	pre_sort(tab, stack);
 	free(tab);
-//	if (stack->a_len >= 3 && stack->a_len <= 5)
-//		sort_five(stack);
-	min_first(stack);
+	if (stack->a_len >= 3 && stack->a_len <= 5)
+		sort_five(stack);
 	tab = tab_create2(stack->a, stack->a_len);
 	lis = find_lis(tab, stack->a_len);
-	(void)lis;
+	free(tab);
+	sort(stack, longest_list(lis));
 	print_stacks(stack);
+	(void)lis;
 	return (0);
 }

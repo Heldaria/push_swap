@@ -6,7 +6,7 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 09:20:51 by llepiney          #+#    #+#             */
-/*   Updated: 2022/03/22 12:34:13 by rigel            ###   ########.fr       */
+/*   Updated: 2022/03/23 01:32:02 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_uplist
 }			t_uplist;
 
 int			ft_atoi(const char *nptr);
+int			abs(int nb);
 int			*tab_create(char **argv, int len);
 void		sort_int_tab(int *tab, unsigned int size);
 void		pre_sort(int *tab, t_stack *stack);
@@ -67,6 +68,7 @@ void		my_lst_print(t_elem *lst);
 void		my_lis_print(t_list *lst);
 void		print_stacks(t_stack *stack);
 void		print_ulst(t_uplist *ulst);
+void		print_mv_tab(t_stack *stack);
 /*       OPERATION     */
 t_stack		*init_stack(char **val);
 void		min_first(t_stack	*stack);
@@ -90,6 +92,20 @@ void		sort_three(t_stack *stack);
 void		sort_five(t_stack *stack);
 int			check_bottom(t_elem *start, int lvl);
 int			check_top(t_elem *start, int lvl);
+int			get_min_pos(t_elem *stack_a);
+int			is_lis(int lvl, t_list *lis);
+int			find_next_pos(t_elem *lst, int lvl);
+int			find_prev_pos(t_elem *lst, int lvl);
+void		push_lis(t_stack *stack, t_list *lis);
+int			abs(int nb);
+int			min(int *tab);
+int			max(int *tab);
+void		sort(t_stack *stack, t_list *lis);
+int			*mv_tab(t_stack *stack, t_elem *lst_b);
+int			mv_calcul(int *tab);
+void		same_sign(int *mintab, t_stack *stack);
+void		dif_sign(int *mintab, t_stack *stack);
+void		exec_tab(int *mintab, t_stack *stack);
 /*      FIND LIS      */
 t_uplist	*find_lis(int *tab, int size);
 t_list		*longest_list(t_uplist *ulst);

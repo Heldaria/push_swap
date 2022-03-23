@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayblin <ayblin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 10:17:50 by ayblin            #+#    #+#             */
-/*   Updated: 2022/03/14 10:18:50 by ayblin           ###   ########.fr       */
+/*   Created: 2022/03/22 22:58:32 by rigel             #+#    #+#             */
+/*   Updated: 2022/03/22 23:07:25 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,25 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (result * sign);
+}
+
+int	abs(int nb)
+{
+	if (nb < 0)
+		nb *= -1;
+	return (nb);
+}
+
+int	min(int *tab)
+{
+	if (abs(tab[0]) < abs(tab[1]))
+		return (abs(tab[0]));
+	return (abs(tab[1]));
+}
+
+int	max(int *tab)
+{
+	if (abs(tab[0]) > abs(tab[1]))
+		return (abs(tab[0]));
+	return (abs(tab[1]));
 }

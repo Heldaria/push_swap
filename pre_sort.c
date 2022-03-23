@@ -6,7 +6,7 @@
 /*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 06:54:20 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/16 08:38:15 by rigel            ###   ########.fr       */
+/*   Updated: 2022/03/22 22:53:29 by rigel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,35 @@
 
 void    pre_sort(int *tab, t_stack *stack)
 {
-    int     i;
-    t_elem *begin;
+	int     i;
+	t_elem *begin;
 
-    i = -1;
-    while(++i < stack->a_len)
-    {
-        begin = stack ->a;
-        while(begin)
-        {
-            if (begin->val == tab[i])
-                begin->lvl = i;
-            begin = begin->next;
-        }
-    }
+	i = -1;
+	while(++i < stack->a_len)
+	{
+		begin = stack ->a;
+		while(begin)
+		{
+			if (begin->val == tab[i])
+				begin->lvl = i;
+			begin = begin->next;
+		}
+	}
 }
 
 int			*tab_create(char **argv, int len)
 {
-    int *tab;
-    int i;
+	int *tab;
+	int i;
 
-    i = 0;
-    tab = malloc(sizeof(int) * len);
-    while (i < len)
-    {
-        tab[i] = ft_atoi(argv[i]);
-        i++;
-    }
-    return (tab);
+	i = 0;
+	tab = malloc(sizeof(int) * len);
+	while (i < len)
+	{
+		tab[i] = ft_atoi(argv[i]);
+		i++;
+	}
+	return (tab);
 }
 
 void	sort_int_tab(int *tab, unsigned int size)
