@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 13:58:55 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/23 02:02:27 by rigel            ###   ########.fr       */
+/*   Created: 2022/03/22 13:58:55 by llepiney          #+#    #+#             */
+/*   Updated: 2022/04/08 17:55:43 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*mv_tab(t_stack *stack, t_elem *lst_b)
+void	mv_tab(t_stack *stack, t_elem *lst_b, int *coord)
 {
-	int	*coord;
-
-	coord = malloc(sizeof(int) * 2);
 	if (lst_b->pos > (stack->b_len / 2))
 		coord[1] = lst_b->pos - stack->b_len;
 	else
@@ -24,70 +21,64 @@ int	*mv_tab(t_stack *stack, t_elem *lst_b)
 	if (find_next_pos(stack->a, lst_b->lvl) == -1)
 	{
 		if (find_prev_pos(stack->a, lst_b->lvl) > stack->a_len)
-			coord[0] = (find_prev_pos(stack->a, lst_b->lvl) - stack->a_len) + 1;
+			coord[0] = (find_prev_pos(stack->a, lst_b->lvl) - stack->a_len);
 		else
-			coord[0] = find_prev_pos(stack->a, lst_b->lvl) + 1;
+			coord[0] = find_prev_pos(stack->a, lst_b->lvl);
 	}
 	else if (find_next_pos(stack->a, lst_b->lvl) > (stack->a_len / 2))
 		coord[0] = find_next_pos(stack->a, lst_b->lvl) - stack->a_len;
 	else if (find_next_pos(stack->a, lst_b->lvl) <= (stack->a_len / 2))
 		coord[0] = find_next_pos(stack->a, lst_b->lvl);
-	return (coord);
 }
 
 int	mv_calcul(int *tab)
 {
-	int	tmp;
-
 	if (tab[1] * tab[0] > 0)
-	{
-		tmp = max(tab);
-		free(tab);
-		return (tmp);
-	}
+		return (max(tab));
 	else
-	{
-		tmp = abs(tab[0]) + abs(tab[1]);
-		free(tab);
-		return (tmp);
-	}
+		return (abs(tab[0]) + abs(tab[1]));
 }
 
 void	sort(t_stack *stack, t_list *lis)
 {
-	t_elem		*lst_b;
+	int			coord[2];
+	int			tmp[2];
 	int			min;
-	int			*mintab;
+	t_elem		*lst_b;
 
 	push_lis(stack, lis);
-	min = mv_calcul(mv_tab(stack, stack->b));
-	mintab = mv_tab(stack, stack->b);
-	 printf("%d%d",mintab[0],min);
-	while (stack->b_len > 0)
+	while (stack->b)
 	{
-		lst_b = stack->b; 
+		lst_b = stack->b;
+		mv_tab(stack, lst_b, coord);
+		min = mv_calcul(coord);
 		while (lst_b)
 		{
-			if (mv_calcul(mv_tab(stack, lst_b)) < min)
+			mv_tab(stack, lst_b, tmp);
+			if (mv_calcul(tmp) < min)
 			{
-				min = mv_calcul(mv_tab(stack, lst_b));
-				free(mintab);
-				mintab = mv_tab(stack, lst_b);
+				min = mv_calcul(tmp);
+				mv_tab(stack, lst_b, coord);
 			}
 			lst_b = lst_b->next;
 		}
-		exec_tab(mintab, stack);
+		exec_tab(coord[0], coord[1], stack);
 	}
 }
 
-void	exec_tab(int *mintab, t_stack *stack)
+void	exec_tab(int mva, int mvb, t_stack *stack)
 {
-	while (mintab[0] != 0 || mintab[1] != 0)
+	int	a;
+	int	b;
+
+	a = mva;
+	b = mvb;
+	while (a != 0 || b != 0)
 	{
-		if ((mintab[0] * mintab[1]) > 0)
-			same_sign(mintab, stack);
+		if ((a * b) > 0)
+			same_sign(&a, &b, stack);
 		else
-			dif_sign(mintab, stack);
+			diff_sign(&a, &b, stack);
 	}
-	op_pb(stack);
+	ft_putstr(op_pa(stack));
 }

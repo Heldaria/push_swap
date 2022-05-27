@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   between_ends.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 13:36:02 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/22 12:49:06 by rigel            ###   ########.fr       */
+/*   Created: 2022/03/21 13:36:02 by llepiney          #+#    #+#             */
+/*   Updated: 2022/04/08 17:46:16 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	discard(t_uplist *ulst, int size)
 		{
 			utmpbis = utmp->next;
 			utmp->next = utmp->next->next;
-			free_uplst(&utmpbis);
+			free_uplst_node(&utmpbis);
 			break ;
 		}
 		utmp = utmp->next;

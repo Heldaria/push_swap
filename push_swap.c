@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/13 03:36:11 by ayblin            #+#    #+#             */
-/*   Updated: 2022/03/23 01:36:04 by rigel            ###   ########.fr       */
+/*   Created: 2022/03/13 03:36:11 by llepiney          #+#    #+#             */
+/*   Updated: 2022/04/11 16:41:00 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,64 +22,59 @@ void	min_first(t_stack	*stack)
 	if (tmp->pos > (stack->a_len / 2))
 	{
 		while (stack->a->lvl != 0)
-			op_rra(stack);
+			ft_putstr(op_rra(stack));
 	}
 	else
 	{
 		while (stack->a->lvl != 0)
-			op_ra(stack);
+			ft_putstr(op_ra(stack));
 	}
-}
-
-int	*tab_create2(t_elem *stack_a, int len)
-{
-	t_elem	*tmp;
-	int		*ret;
-	int		i;
-
-	ret = malloc(sizeof(int) * len);
-	if (!ret)
-		return (0);
-	tmp = stack_a;
-	i = 0;
-	while (tmp->lvl != 0)
-		tmp = tmp->next;
-	while (tmp)
-	{
-		ret[i] = tmp->lvl;
-		i++;
-		tmp = tmp->next;
-	}
-	tmp = stack_a;
-	while (tmp->lvl != 0)
-	{
-		ret[i] = tmp->lvl;
-		i++;
-		tmp = tmp->next;
-	}
-	return (ret);
 }
 
 int	main(int ac, char **av)
 {
 	t_stack		*stack;
 	int			*tab;
-	t_uplist	*lis;
+	char		**arg;
 
-	(void)ac;
-	stack = init_stack(++av);
-	print_stacks(stack);
-	tab = tab_create(av, stack->a_len);
+	if (ac == 1)
+		return (1);
+	if (ac == 2)
+		arg = ft_split(av[1], ' ');
+	else
+		arg = av + 1;
+	if (error_check(arg) < 1)
+	{
+		if (ac == 2)
+			free_tab(arg);
+		return (0);
+	}
+	stack = init_stack(arg);
+	set_pos(stack);
+	tab = tab_create(arg, stack->a_len);
+	if (ac == 2)
+		free_tab(arg);
 	sort_int_tab(tab, stack->a_len - 1);
 	pre_sort(tab, stack);
-	free(tab);
-	if (stack->a_len >= 3 && stack->a_len <= 5)
-		sort_five(stack);
-	tab = tab_create2(stack->a, stack->a_len);
-	lis = find_lis(tab, stack->a_len);
-	free(tab);
-	sort(stack, longest_list(lis));
-	print_stacks(stack);
-	(void)lis;
+	push_swap(stack);
 	return (0);
+}
+
+void	push_swap(t_stack *stack)
+{
+	int			*tab;
+	t_uplist	*lis;
+
+	if (stack->a_len >= 2 && stack->a_len <= 5)
+		sort_five(stack);
+	else
+	{	
+		tab = listab_create(stack->a, stack->a_len);
+		lis = find_lis(tab, stack->a_len);
+		free(tab);
+		sort(stack, longest_list(lis));
+		free_uplst(&lis);
+	}
+	min_first(stack);
+	free_stack(stack);
 }

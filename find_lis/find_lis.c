@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_lis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 18:00:43 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/22 12:38:37 by rigel            ###   ########.fr       */
+/*   Created: 2022/03/19 18:00:43 by llepiney          #+#    #+#             */
+/*   Updated: 2022/04/08 17:47:29 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_uplist	*find_lis(int *tab, int size)
 
 	ulst = ft_uplstnew(ft_lstnew(tab[0]));
 	i = 1;
-	print_ulst(ulst);
 	while (i < size)
 	{
 		if (sup_ends(ulst, tab[i]))
@@ -28,7 +27,5 @@ t_uplist	*find_lis(int *tab, int size)
 			between_ends(ulst, tab[i]);
 		i++;
 	}
-	print_ulst(ulst);
 	return (ulst);
 }
-//oublie pas de clear ulst

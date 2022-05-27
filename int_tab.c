@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pre_sort.c                                         :+:      :+:    :+:   */
+/*   int_tab.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 06:54:20 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/22 22:53:29 by rigel            ###   ########.fr       */
+/*   Created: 2022/03/16 06:54:20 by llepiney          #+#    #+#             */
+/*   Updated: 2022/04/08 17:53:00 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    pre_sort(int *tab, t_stack *stack)
+void	pre_sort(int *tab, t_stack *stack)
 {
-	int     i;
-	t_elem *begin;
+	int		i;
+	t_elem	*begin;
 
 	i = -1;
-	while(++i < stack->a_len)
+	while (++i < stack->a_len)
 	{
-		begin = stack ->a;
-		while(begin)
+		begin = stack->a;
+		while (begin)
 		{
 			if (begin->val == tab[i])
 				begin->lvl = i;
 			begin = begin->next;
 		}
 	}
+	free(tab);
 }
 
-int			*tab_create(char **argv, int len)
+int	*tab_create(char **argv, int len)
 {
-	int *tab;
-	int i;
+	int	*tab;
+	int	i;
 
 	i = 0;
 	tab = malloc(sizeof(int) * len);
@@ -65,4 +66,33 @@ void	sort_int_tab(int *tab, unsigned int size)
 			++a;
 		}
 	}
+}
+
+int	*listab_create(t_elem *stack_a, int len)
+{
+	t_elem	*tmp;
+	int		*ret;
+	int		i;
+
+	ret = malloc(sizeof(int) * len);
+	if (!ret)
+		return (0);
+	tmp = stack_a;
+	i = 0;
+	while (tmp->lvl != 0)
+		tmp = tmp->next;
+	while (tmp)
+	{
+		ret[i] = tmp->lvl;
+		i++;
+		tmp = tmp->next;
+	}
+	tmp = stack_a;
+	while (tmp->lvl != 0)
+	{
+		ret[i] = tmp->lvl;
+		i++;
+		tmp = tmp->next;
+	}
+	return (ret);
 }

@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 22:58:32 by rigel             #+#    #+#             */
-/*   Updated: 2022/03/22 23:07:25 by rigel            ###   ########.fr       */
+/*   Created: 2022/03/22 22:58:32 by llepiney          #+#    #+#             */
+/*   Updated: 2022/04/08 17:56:03 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *nptr)
+#include "push_swap.h"
+
+long long	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	sign;
-	int	result;
+	int			i;
+	int			sign;
+	long long	result;
 
 	i = 0;
 	result = 0;

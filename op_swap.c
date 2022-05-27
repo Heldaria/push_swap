@@ -1,53 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   op_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:11:28 by llepiney          #+#    #+#             */
-/*   Updated: 2022/04/08 17:51:54 by llepiney         ###   ########.fr       */
+/*   Updated: 2022/04/08 17:54:16 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	same_sign(int *mva, int *mvb, t_stack *stack)
+char	*op_sa(t_stack *stack)
 {
-	if (*mva < 0)
-	{
-		ft_putstr(op_rrr(stack));
-		*mva = *mva + 1;
-		*mvb += 1;
-	}
-	else
-	{
-		ft_putstr(op_rr(stack));
-		*mva -= 1;
-		*mvb -= 1;
-	}
+	int	tmp;
+
+	tmp = stack->a->val;
+	stack->a->val = stack->a->next->val;
+	stack->a->next->val = tmp;
+	tmp = stack->a->lvl;
+	stack->a->lvl = stack->a->next->lvl;
+	stack->a->next->lvl = tmp;
+	return ("sa\n");
 }
 
-void	diff_sign(int *mva, int *mvb, t_stack *stack)
+char	*op_sb(t_stack *stack)
 {
-	if (*mva < 0)
-	{
-		ft_putstr(op_rra(stack));
-		(*mva)++;
-	}
-	if (*mva > 0)
-	{
-		ft_putstr(op_ra(stack));
-		(*mva)--;
-	}
-	if (*mvb < 0)
-	{
-		ft_putstr(op_rrb(stack));
-		(*mvb)++;
-	}
-	if (*mvb > 0)
-	{
-		ft_putstr(op_rb(stack));
-		(*mvb)--;
-	}
+	int	tmp;
+
+	tmp = stack->b->val;
+	stack->b->val = stack->b->next->val;
+	stack->b->next->val = tmp;
+	tmp = stack->b->lvl;
+	stack->b->lvl = stack->b->next->lvl;
+	stack->b->next->lvl = tmp;
+	return ("sb\n");
+}
+
+char	*op_ss(t_stack *stack)
+{
+	op_sa(stack);
+	op_sb(stack);
+	return ("ss\n");
 }

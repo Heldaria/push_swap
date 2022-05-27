@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rigel <rigel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: llepiney <llepiney@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/13 03:44:44 by ayblin            #+#    #+#             */
-/*   Updated: 2022/03/22 13:09:57 by rigel            ###   ########.fr       */
+/*   Created: 2022/03/13 03:44:44 by llepiney          #+#    #+#             */
+/*   Updated: 2022/04/08 17:52:46 by llepiney         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	init_stack2(t_stack *stack, int i)
+{
+	stack->a_end->next = NULL ;
+	stack->a_len = i;
+	stack->b = NULL;
+	stack->b_len = 0;
+}
 
 t_stack	*init_stack(char **val)
 {
@@ -37,9 +45,6 @@ t_stack	*init_stack(char **val)
 		tmp = elem;
 	}
 	stack ->a_end = elem;
-	stack->a_len = i;
-	stack->b = NULL;
-	set_pos(stack);
+	init_stack2(stack, i);
 	return (stack);
 }
-
